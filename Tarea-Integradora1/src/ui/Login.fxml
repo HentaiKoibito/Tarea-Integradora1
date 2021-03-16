@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Label text="Login" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="44.0" />
+         </font>
+      </Label>
+   </top>
+   <left>
+      <GridPane prefHeight="403.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="100.0000228881836" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="499.9999771118164" minWidth="10.0" prefWidth="499.9999771118164" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="120.0" minHeight="0.0" prefHeight="120.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="136.66665649414062" minHeight="0.0" prefHeight="136.66665649414062" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="215.33334350585938" minHeight="10.0" prefHeight="143.33334350585938" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="usernamelogintxt" prefHeight="31.0" prefWidth="276.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="passwordlogintxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Username" GridPane.rowIndex="1">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label text="Password" GridPane.rowIndex="2">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+   </left>
+   <bottom>
+      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Button layoutX="122.0" layoutY="66.0" mnemonicParsing="false" onAction="#signuploginBtn" text="Sign up">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Button layoutX="122.0" layoutY="67.0" mnemonicParsing="false" onAction="#signinloginBtn" text="Sign in">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </bottom>
+</BorderPane>
