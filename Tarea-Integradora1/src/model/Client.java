@@ -2,13 +2,13 @@ package model;
 
 public class Client extends Person {
 	private String adress;
-	private String phoneNumber;
+	private String phoneNumbe;
 	private String advices;
 	
-	public Client (String name, String lastName, String identification, String advices, String phoneNumber, String adress) {
+	public Client (String name, String lastName, String identification, String advices, String phoneNumbe, String adress) {
 		super(name, lastName, identification);
 		this.adress = adress;
-		this.phoneNumber = phoneNumber;
+		this.phoneNumbe = phoneNumbe;
 		this.advices = advices; 
 	}
 		public String getAdress() {
@@ -18,10 +18,10 @@ public class Client extends Person {
 			this.adress=adress;
 		}
 		public String getPhoneNumber() {
-			return phoneNumber;
+			return phoneNumbe;
 		}
-		public void setPhoneNumber(String phoneNumber) {
-			this.phoneNumber=phoneNumber;
+		public void setPhoneNumber(String phoneNumbe) {
+			this.phoneNumbe=phoneNumbe;
 		}
 		public String getAdvices() {
 			return advices;
@@ -29,11 +29,13 @@ public class Client extends Person {
 		public void setAdvices(String advices) {
 			this.advices=advices;
 		}
+		
 	@Override
 	public String getInformation() {
 		String a="";
 		a+= getName()+" "+getLastName()+" "+getIdentification()+" "+adress+" "+phoneNumber+" "+advices+" ";
 		return a;
+		
 		
 	}
 		
