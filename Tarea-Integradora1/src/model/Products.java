@@ -3,10 +3,10 @@ package model;
 public class Products {
 	private String name;
 	private String[] type;
-	private double size;
+	private String[] size;
 	private double price;
 	
-	public Products (String name, String[] type, double size, double price) {
+	public Products (String name, String[] type, String[] size, double price) {
 		this.name=name;
 		this.type=type;
 		this.size=size;
@@ -25,10 +25,10 @@ public class Products {
 	public void serType(String[] type) {
 		this.type=type;
 	}
-	public double getSize() {
+	public String[] getSize() {
 		return size;
 	}
-	public void setSize(double size) {
+	public void setSize(String[] size) {
 		this.size = size;
 	}
 	public double getPrice() {
@@ -37,4 +37,8 @@ public class Products {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-}
+	
+
+		
+	}
+
