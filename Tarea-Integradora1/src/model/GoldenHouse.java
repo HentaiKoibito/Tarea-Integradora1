@@ -1,19 +1,25 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GoldenHouse {
 private ArrayList<Products> productsList;
-private ArrayList<Products> allProducts;
+private ArrayList<Products> productsEnabled;
+private int ind;
+private int typesAmount;
+private int sizeAmount;
+private String finalName;
+private double finalPrice;
 
 	public GoldenHouse() {
 		productsList=new ArrayList<Products>();
-		allProducts=new ArrayList<Products>();
+		productsEnabled=new ArrayList<Products>();
 	}
 	
-	public boolean createProduct(String name, String[] type, String[] size, double price) {
+	public boolean createProduct(String name, String[] type, String[] size, double price, boolean state, int typesAmount, int typesInd, int sizeAmount,String finalSize, int sizeInd) {
 		
-		Products productsTemp=new Products(name, type, size, price);
+		Products productsTemp=new Products(name, type, size, price, state, typesAmount, typesInd, sizeAmount, finalSize, sizeInd);
 		if(productsList.add(productsTemp)) {
 			if(productsList.size()>1) {
 				sortArrayList(productsList);
@@ -34,47 +40,86 @@ private ArrayList<Products> allProducts;
 	}
 	
 	public boolean disableProduct(String name) {
+		
 		for(int i=0; i<productsList.size();i++) {
-			allProducts.add(i,productsList.get(i));
+			productsEnabled.add(i,productsList.get(i));
 		}
 		for(int i=0;i<productsList.size();i++) {
-				if(name.equalsIgnoreCase(productsList.get(i).getName())) {
-					productsList.remove(i);
+				if(name.equalsIgnoreCase(productsEnabled.get(i).getName())) {
+					productsList.get(i).setState(false);
+					productsEnabled.remove(i);
 					return true;
 			}
 		}
 		return false;
 	}
 	
-	public boolean updateProducts() {}
-	
-	public void sortArrayList (ArrayList<Products> a) {
-	double mChange=0;
-	if(a.size()>1) {
-		for(int i=1; i<a.size();i++) {
-			 mChange=0;
-			for(int j=0;j<a.size();j++) {
-				if(a.get(j).getPrice()>a.get(j+1).getPrice()) {
-					Products temp = a.get(j+1);
-					Products temps= a.get(j);
-					a.add(j+1,temps);
-					for(int it=0;it<a.size();it++) {
-						if(a.get(j+1).getName().equalsIgnoreCase(a.get(it).getName())) {
-							a.remove(it);
-						}
-					}
-					a.add(j,temp); 
-					for(int it=0;it<a.size();it++) {
-						if(a.get(j).getName().equalsIgnoreCase(a.get(it).getName())) {
-							a.remove(it);
-						}
-					}
-
-					
-				}
+	public boolean updateNameProducts(String finalName, String name){
+		for(int i=0;i<productsList.size();i++) {
+			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+				productsList.get(i).setName(finalName);
+				return true;
 			}
-		
 		}
+		return false;
+	}
+	
+	public boolean updateTypeAmountProducts(String name, int typeAmount, String[] type) {
+		for(int i=0;i<productsList.size();i++) {
+			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+						productsList.get(i).setType(type, typeAmount);
+						return true;
 	}
 }
+	return false;
+		
+		
+	}
+	
+	public boolean updateTypeProduct(String name, String[] type, int typeInd) {
+		for(int i=0; i<productsList.size();i++) {
+			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+				productsList.get(i).setFinalType(type, typeInd);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean updateAmountSize(String name, int sizeAmount, String[] size) {
+		for(int i=0;i<productsList.size();i++) {
+			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+						productsList.get(i).setType(size, sizeAmount);
+						return true;
+	}
+}
+	return false;
+	}
+	
+	public boolean updateSize(String name, String[]	size, int sizeInd) {
+		for(int i=0; i<productsList.size();i++) {
+			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+				productsList.get(i).setFinalSize(size, sizeInd);
+				return true;
+			}
+		}
+		return false;
+	}
+	}
+	
+	public void setTypeAmount(int typeAmount) {
+		this.typesAmount=typeAmount;
+	}
+	public void setSizeAmount(int sizeAmount) {
+		this.sizeAmount=sizeAmount;
+	}
+	
+	public boolean updatePrice(String name, double price, double finalPrice) {
+		
+	}
+	
+	public void sortArrayList(ArrayList<Products> a) {
+		Collections.sort(a);
+	}
+	
 }

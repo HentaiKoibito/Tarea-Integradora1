@@ -1,18 +1,26 @@
 package model;
 
-public class Products {
+public class Products implements Comparable<Products> {
 	private String name;
+	private int typesInd;
 	private String[] type;
 	private String[] size;
 	private double price;
-	private int typesAmount;
 	public boolean state;
+	private String finalType;
+	private String finalSize;
+	private int sizeInd;
 	
-	public Products (String name, String[] type, String[] size, double price) {
+	public Products (String name, String[] type, String[] size, double price, boolean state, int typesAmount, int typesInd, int sizeAmount, String finalSize, int sizeInd) {
 		this.name=name;
-		this.type=type;
 		this.size=size;
 		this.price=price;
+		type=new String[typesAmount];
+		finalType=type[typesInd];
+		state=true;
+		size=new String[sizeAmount];
+		finalSize=size[sizeInd];
+		
 	}
 	public String getName() {
 		return name;
@@ -24,8 +32,8 @@ public class Products {
 	public String[] getType() {
 		return type;
 	}
-	public void serType(String[] type) {
-		this.type=type;
+	public void setType(String[] type, int typesAmount) {
+		type=new String[typesAmount];
 	}
 	public String[] getSize() {
 		return size;
@@ -40,11 +48,36 @@ public class Products {
 		this.price = price;
 	}
 	
-	public int getTypesAmount() {
-		return typesAmount;
+	
+	public boolean getState() {
+		return state;
 	}
 	
-
+	public void setState(boolean state) {
+		this.state=state;
+	}
+	
+	public String getFinalType() {
+		return finalType;
+	}
+	
+	public void setFinalType(String[] type, int typeInd) {
+		finalType=type[typeInd];
+	}
+	
+	public String getFinalSize() {
+		return finalSize;
+	}
+	
+	public void setFinalSize(String[] size, int sizeInd) {
+		finalSize=size[sizeInd];
+		}
+	@Override
+	public int compareTo(Products o) {
+		
+		
+		return (int) (price-o.price);
+	}
 		
 	}
 
