@@ -11,6 +11,8 @@ private int typesAmount;
 private int sizeAmount;
 private String finalName;
 private double finalPrice;
+private String[] type;
+private String[] size;
 
 	public GoldenHouse() {
 		productsList=new ArrayList<Products>();
@@ -76,6 +78,15 @@ private double finalPrice;
 		
 	}
 	
+	public boolean deleteType(String name, int typeAmount, String[] type) {
+		int temp;
+		for(int i=0;i<type.length;i++) {
+			if(name.equalsIgnoreCase(type[i])) {
+				type[i]=null;
+			}
+		}
+	}
+	
 	public boolean updateTypeProduct(String name, String[] type, int typeInd) {
 		for(int i=0; i<productsList.size();i++) {
 			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
@@ -105,7 +116,7 @@ private double finalPrice;
 		}
 		return false;
 	}
-	}
+	
 	
 	public void setTypeAmount(int typeAmount) {
 		this.typesAmount=typeAmount;
@@ -114,12 +125,24 @@ private double finalPrice;
 		this.sizeAmount=sizeAmount;
 	}
 	
-	public boolean updatePrice(String name, double price, double finalPrice) {
-		
+	public boolean updatePrice(String name, double price) {
+		for(int i=0;i<productsList.size();i++) {
+			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+				productsList.get(i).setPrice(price);
+				return true;
+			}
+		}
+		return false;
 	}
+	
+	public
+	
+	//ingredients
+	public void 
 	
 	public void sortArrayList(ArrayList<Products> a) {
 		Collections.sort(a);
 	}
+	
 	
 }
