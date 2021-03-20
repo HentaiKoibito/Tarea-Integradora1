@@ -5,6 +5,7 @@ public class Products {
 	private String[] type;
 	private String[] size;
 	private double price;
+	private int typesAmount;
 	
 	public Products (String name, String[] type, String[] size, double price) {
 		this.name=name;
