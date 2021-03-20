@@ -46,9 +46,9 @@ private ArrayList<Products> allProducts;
 		return false;
 	}
 	
-	public 
+	public boolean updateProducts() {}
 	
-	public static void sortArrayList (ArrayList<Products> a) {
+	public void sortArrayList (ArrayList<Products> a) {
 	double mChange=0;
 	if(a.size()>1) {
 		for(int i=1; i<a.size();i++) {

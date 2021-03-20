@@ -6,6 +6,7 @@ public class Products {
 	private String[] size;
 	private double price;
 	private int typesAmount;
+	public boolean state;
 	
 	public Products (String name, String[] type, String[] size, double price) {
 		this.name=name;
@@ -37,6 +38,10 @@ public class Products {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	public int getTypesAmount() {
+		return typesAmount;
 	}
 	
 
