@@ -7,21 +7,24 @@ public class GoldenHouse {
 private ArrayList<Products> productsList;
 private ArrayList<Products> productsEnabled;
 private int ind;
-private int typesAmount;
-private int sizeAmount;
 private String finalName;
 private double finalPrice;
-private String[] type;
-private String[] size;
+private ArrayList<String> typesAmount;
+private ArrayList<String> ingredients;
+private ArrayList<String> sizesAmount;
+
+
 
 	public GoldenHouse() {
 		productsList=new ArrayList<Products>();
 		productsEnabled=new ArrayList<Products>();
+		 typesAmount=new ArrayList<String>();
+		 ingredients=new ArrayList<String>();
+		 sizesAmount=new ArrayList<String>();
 	}
 	
-	public boolean createProduct(String name, String[] type, String[] size, double price, boolean state, int typesAmount, int typesInd, int sizeAmount,String finalSize, int sizeInd) {
-		
-		Products productsTemp=new Products(name, type, size, price, state, typesAmount, typesInd, sizeAmount, finalSize, sizeInd);
+	public boolean createProduct(String name, String type, String[] ingredients, String size, double price, boolean state) {
+		Products productsTemp=new Products(name, type, ingredients, size, price, state);
 		if(productsList.add(productsTemp)) {
 			if(productsList.size()>1) {
 				sortArrayList(productsList);
@@ -29,6 +32,28 @@ private String[] size;
 			return true;
 		}
 		return false;
+	}
+	
+	
+	public boolean createType(String name) {
+		for(int i=0;i<typesAmount.size();i++) {
+			if(name.equalsIgnoreCase(typesAmount.get(i))) {
+				return false;
+			}
+			else {
+				typesAmount.add(name);
+				return true;
+			}
+		}
+		return false;
+	}
+	//
+	public String chooseTypeToAProduct(String type) {
+		for(int i=0;i<typesAmount.size();i++){
+			if(type.equalsIgnoreCase(typesAmount.get(i))) {
+				return type;
+			}
+		}
 	}
 	
 	public boolean deleteProduct(String name) {
@@ -46,6 +71,8 @@ private String[] size;
 		for(int i=0; i<productsList.size();i++) {
 			productsEnabled.add(i,productsList.get(i));
 		}
+		//Relleno productsEnabled
+		
 		for(int i=0;i<productsList.size();i++) {
 				if(name.equalsIgnoreCase(productsEnabled.get(i).getName())) {
 					productsList.get(i).setState(false);
@@ -60,13 +87,14 @@ private String[] size;
 		for(int i=0;i<productsList.size();i++) {
 			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
 				productsList.get(i).setName(finalName);
+				productsEnabled.get(i).setName(finalName);
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public boolean updateTypeAmountProducts(String name, int typeAmount, String[] type) {
+	/**public boolean updateTypeAmountProducts(String name, int typeAmount, String[] type) {
 		for(int i=0;i<productsList.size();i++) {
 			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
 						productsList.get(i).setType(type, typeAmount);
@@ -76,18 +104,18 @@ private String[] size;
 	return false;
 		
 		
-	}
+	} */
 	
-	public boolean deleteType(String name, int typeAmount, String[] type) {
+	/**public boolean deleteType(String name, int typeAmount, String[] type) {
 		int temp;
 		for(int i=0;i<type.length;i++) {
 			if(name.equalsIgnoreCase(type[i])) {
 				type[i]=null;
 			}
 		}
-	}
+	}*/
 	
-	public boolean updateTypeProduct(String name, String[] type, int typeInd) {
+	/**public boolean updateTypeProduct(String name, String[] type, int typeInd) {
 		for(int i=0; i<productsList.size();i++) {
 			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
 				productsList.get(i).setFinalType(type, typeInd);
@@ -95,9 +123,9 @@ private String[] size;
 			}
 		}
 		return false;
-	}
+	}*/
 	
-	public boolean updateAmountSize(String name, int sizeAmount, String[] size) {
+	/**public boolean updateAmountSize(String name, int sizeAmount, String[] size) {
 		for(int i=0;i<productsList.size();i++) {
 			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
 						productsList.get(i).setType(size, sizeAmount);
@@ -133,7 +161,7 @@ private String[] size;
 			}
 		}
 		return false;
-	}
+	}*/
 	
 	public
 	
