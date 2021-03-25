@@ -3,8 +3,6 @@ package model;
 public class Products implements Comparable<Products> {
 	private String name;
 	private int typesInd;
-	private String[] type;
-	private String[] size;
 	private double price;
 	public boolean state;
 	private String finalType;
@@ -13,7 +11,6 @@ public class Products implements Comparable<Products> {
 	
 	public Products (String name, String[] type, String[] size, double price, boolean state, int typesAmount, int typesInd, int sizeAmount, String finalSize, int sizeInd) {
 		this.name=name;
-		this.size=size;
 		this.price=price;
 		type=new String[typesAmount];
 		finalType=type[typesInd];
@@ -29,18 +26,11 @@ public class Products implements Comparable<Products> {
 	public void setName(String name) {
 		this.name=name;
 	}
-	public String[] getType() {
-		return type;
-	}
+	
 	public void setType(String[] type, int typesAmount) {
 		type=new String[typesAmount];
 	}
-	public String[] getSize() {
-		return size;
-	}
-	public void setSize(String[] size) {
-		this.size = size;
-	}
+	
 	public double getPrice() {
 		return price;
 	}
