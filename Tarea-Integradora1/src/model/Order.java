@@ -5,7 +5,7 @@ public class Order {
 	private String[] condition;
 	private String listOfProducts;
 	private String observations;
-	
+
 	public Order(String code, String[] condition, String listOfProducts, String observations) {
 		this.code=code;
 		this.condition=condition;
