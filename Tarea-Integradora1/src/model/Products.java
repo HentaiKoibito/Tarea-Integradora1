@@ -14,6 +14,7 @@ public class Products implements Comparable<Products> {
 		this.price=price;
 		state=true;
 		this.type=type;
+		this.size=size;
 	
 	}
 	public String getName() {
@@ -32,8 +33,12 @@ public class Products implements Comparable<Products> {
 		this.type=type;
 	}
 	
-	public String[] getIgredients() {
+	public String[] getIngredients() {
 		return ingredients;
+	}
+	
+	public void setIngredients(String[] ingredients) {
+		this.ingredients=ingredients;
 	}
 	
 	public String getSize() {

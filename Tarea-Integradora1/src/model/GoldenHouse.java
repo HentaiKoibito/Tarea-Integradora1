@@ -10,17 +10,18 @@ private int ind;
 private String finalName;
 private double finalPrice;
 private ArrayList<String> typesAmount;
+private ArrayList<String> typesEnabled;
 private ArrayList<String> ingredients;
-private ArrayList<String> sizesAmount;
-
-
+private ArrayList<String> ingredientsEnabled;
 
 	public GoldenHouse() {
 		productsList=new ArrayList<Products>();
-		productsEnabled=new ArrayList<Products>();
-		 typesAmount=new ArrayList<String>();
-		 ingredients=new ArrayList<String>();
-		 sizesAmount=new ArrayList<String>();
+		productsEnabled=productsList;
+		typesAmount=new ArrayList<String>();
+		typesEnabled=typesAmount;
+		ingredients=new ArrayList<String>();
+		ingredientsEnabled= ingredients;
+		 
 	}
 	
 	public boolean createProduct(String name, String type, String[] ingredients, String size, double price, boolean state) {
@@ -48,6 +49,8 @@ private ArrayList<String> sizesAmount;
 		return false;
 	}
 	//Se escoge el tipo que se le va a pasar al constructor
+	//metodo para la Ui de esta forma se valida si el tipo sí existe
+	
 	public boolean chooseTypeToAProduct(String type) {
 		for(int i=0;i<typesAmount.size();i++){
 			if(type.equalsIgnoreCase(typesAmount.get(i))) {
@@ -76,8 +79,8 @@ private ArrayList<String> sizesAmount;
 	public String[] chooseIngredientToAProduct(String[] ingredient) {
 		String[] finalIngredient=amountIngredientToAProduct(ingredient);
 		for(int i=0; i<ingredient.length;i++) {
-			for(int j=0;j<ingredients.size();j++) {
-				if(ingredient[i].equalsIgnoreCase(ingredients.get(j))) {
+			for(int j=0;j<ingredientsEnabled.size();j++) {
+				if(ingredient[i].equalsIgnoreCase(ingredientsEnabled.get(j))) {
 					finalIngredient[i]=ingredient[i];
 				}
 			}
@@ -99,39 +102,24 @@ private ArrayList<String> sizesAmount;
 		
 	}
 	//Si se no se agrega es porque existe previamente.
-	public boolean createSize(String size) {
-		for(int i=0;i<sizesAmount.size();i++) {
-			if(size.equalsIgnoreCase(sizesAmount.get(i))) {
-				return false;
-			}
-			else {
-				
-				sizesAmount.add(size);
-				return true;
-			}
-		}
-		return false;
-	}
+
 	
-	//El size que el usuario escoja se valida primero que sí exista y despues se escoge.
-	public boolean chooseSizeToAProduct(String size) {
-		for(int i=0;i<sizesAmount.size();i++){
-			if(size.equalsIgnoreCase(sizesAmount.get(i))) {
-				return true;
-			}
-		}
-		return false;
-	}
+	
 	
 	public boolean deleteProduct(String name) {
 		for(int i=0; i<productsList.size();i++) {
+			for(int j=0;j<productsEnabled.size();j++) {
 			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
 				productsList.remove(i);
+				if(name.equalsIgnoreCase(productsEnabled.get(i).getName())){
+					productsEnabled.remove(j);
+				}
 				return true;
 			}
 		}
-		return false;
 	}
+		return false;
+}
 	
 	public boolean deleteType(String type) {
 		for(int i=0;i<productsList.size();i++) {
@@ -146,6 +134,37 @@ private ArrayList<String> sizesAmount;
 		}
 		return false;
 	}
+	
+	public boolean deleteIngredients(String ingredient) {
+		boolean temp=false;
+		for(int i=0;i<productsList.size();i++) {
+			for(int j=0;j<productsList.get(i).getIngredients().length;j++) {
+				if(ingredient.equalsIgnoreCase(productsList.get(i).getIngredients()[j])) {
+					return false;
+					
+				}
+				else {
+					temp=true;
+				}
+			}
+		}
+		if(temp=true) {
+			for(int i=0; i<ingredients.size();i++) {
+				if(ingredient.equalsIgnoreCase(ingredients.get(i))) {
+					ingredients.remove(i);
+					for(int j=0;j<ingredientsEnabled.size();j++) {
+						if(ingredients.get(i).equalsIgnoreCase(ingredientsEnabled.get(j))) {
+							ingredientsEnabled.remove(j);
+						}
+					}
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	
 	
 	public boolean disableProduct(String name) {
 		
@@ -164,28 +183,112 @@ private ArrayList<String> sizesAmount;
 		return false;
 	}
 	
-	public boolean updateNameProducts(String finalName, String name){	
-		for(int i=0;i<productsList.size();i++) {
-			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
-				productsList.get(i).setName(finalName);
-				productsEnabled.get(i).setName(finalName);
-				return true;
+	public boolean disableType(String type) {
+		for(int i=0; i<typesAmount.size();i++) {
+			typesEnabled.add(i,typesAmount.get(i));
+		}
+		//Relleno typesEnabled
+		
+		for(int i=0;i<typesAmount.size();i++) {
+				if(type.equalsIgnoreCase(typesEnabled.get(i))){
+					typesEnabled.remove(i);
+					return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean disableIngredients(String ingredient) {
+		for(int i=0; i<ingredients.size();i++) {
+			ingredientsEnabled.add(i,ingredients.get(i));
+		}
+		//Relleno ingredientsEnabled
+		
+		for(int i=0;i<ingredients.size();i++) {
+				if(ingredient.equalsIgnoreCase(ingredientsEnabled.get(i))){
+					ingredientsEnabled.remove(i);
+					return true;
 			}
 		}
 		return false;
 	}
 	
+	//Todos los update requieren el nombre del producto para así mismo buscarlo
+	public boolean updateNameProducts(String finalName, String name){	
+		for(int i=0;i<productsEnabled.size();i++) {
+			if(name.equalsIgnoreCase(productsEnabled.get(i).getName())) {
+				productsEnabled.get(i).setName(finalName);
+				for(int j=0;j<productsList.size();j++) {
+					if(productsEnabled.get(i).getName().equalsIgnoreCase(productsList.get(j).getName())) {
+						productsList.get(j).setName(finalName);
+					}
+				return true;
+				}
+			}
+		}
+		return false;
+}		
+	
 	public boolean updateTypeProducts(String name, String finalType) {
-		for(int i=0;i<productsList.size();i++) {
-			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+		for(int i=0;i<productsEnabled.size();i++) {
+			if(name.equalsIgnoreCase(productsEnabled.get(i).getName())) {
 				if(chooseTypeToAProduct(finalType)) {
-					productsList.get(i).setType(finalType);
+					productsEnabled.get(i).setType(finalType);
+					for(int j=0;j<productsList.size();j++) {
+						if(productsEnabled.get(i).getName().equalsIgnoreCase(productsList.get(j).getName())) {
+							productsList.get(j).setType(finalType);
+						}
+					}
 					return true;
 				}
 			}
 		}
 		return false;
 	}
+	
+	//Para actualizar los ingredientes de un producto será necesario 
+	//Crear una interfaz la cual le permita al usuario dar click en los nuevos ingredientes
+	public boolean updateIngredients(String name, String[] newIngredients) {
+		for(int i=0; i<productsList.size();i++) {
+		if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+			productsList.get(i).setIngredients(chooseIngredientToAProduct(newIngredients));
+			if(name.equalsIgnoreCase(productsEnabled.get(i).getName())) {
+				productsEnabled.get(i).setIngredients(chooseIngredientToAProduct(newIngredients));
+				return true;
+			}
+		}
+		
+	}
+		return false;
+}
+	
+	public boolean updateSize(String name, String newSize) {
+		for(int i=0; i<productsList.size();i++) {
+			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+				productsList.get(i).setSize(newSize);
+				if(name.equalsIgnoreCase(productsEnabled.get(i).getName())){
+					productsEnabled.get(i).setSize(newSize);
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean updatePrice(String name, double newPrice) {
+		for(int i=0;i<productsList.size();i++) {
+			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
+				productsList.get(i).setPrice(newPrice);
+				if(name.equalsIgnoreCase(productsEnabled.get(i).getName())) {
+					productsEnabled.get(i).setPrice(newPrice);
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	
 	/**public boolean updateTypeAmountProducts(String name, int typeAmount, String[] type) {
 		for(int i=0;i<productsList.size();i++) {
