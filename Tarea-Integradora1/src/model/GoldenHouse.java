@@ -6,13 +6,11 @@ import java.util.Collections;
 public class GoldenHouse {
 private ArrayList<Products> productsList;
 private ArrayList<Products> productsEnabled;
-private int ind;
-private String finalName;
-private double finalPrice;
 private ArrayList<String> typesAmount;
 private ArrayList<String> typesEnabled;
 private ArrayList<String> ingredients;
 private ArrayList<String> ingredientsEnabled;
+private ArrayList<Client> clients;
 
 	public GoldenHouse() {
 		productsList=new ArrayList<Products>();
@@ -21,6 +19,7 @@ private ArrayList<String> ingredientsEnabled;
 		typesEnabled=typesAmount;
 		ingredients=new ArrayList<String>();
 		ingredientsEnabled= ingredients;
+		clients=new ArrayList<Client>();
 		 
 	}
 	
@@ -288,76 +287,91 @@ private ArrayList<String> ingredientsEnabled;
 		return false;
 	}
 	
+	//Aqui empiezo a trabajar con clientes, usuarios, empleados
 	
-	
-	/**public boolean updateTypeAmountProducts(String name, int typeAmount, String[] type) {
-		for(int i=0;i<productsList.size();i++) {
-			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
-						productsList.get(i).setType(type, typeAmount);
-						return true;
-	}
-}
-	return false;
-		
-		
-	} */
-	
-	/**public boolean deleteType(String name, int typeAmount, String[] type) {
-		int temp;
-		for(int i=0;i<type.length;i++) {
-			if(name.equalsIgnoreCase(type[i])) {
-				type[i]=null;
-			}
-		}
-	}*/
-	
-	/**public boolean updateTypeProduct(String name, String[] type, int typeInd) {
-		for(int i=0; i<productsList.size();i++) {
-			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
-				productsList.get(i).setFinalType(type, typeInd);
-				return true;
-			}
-		}
-		return false;
-	}*/
-	
-	/**public boolean updateAmountSize(String name, int sizeAmount, String[] size) {
-		for(int i=0;i<productsList.size();i++) {
-			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
-						productsList.get(i).setType(size, sizeAmount);
-						return true;
-	}
-}
-	return false;
-	}
-	
-	public boolean updateSize(String name, String[]	size, int sizeInd) {
-		for(int i=0; i<productsList.size();i++) {
-			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
-				productsList.get(i).setFinalSize(size, sizeInd);
+	public boolean addClient(String name, String lastName, String identification, String advices, String phoneNumber, String address){
+		for(int i=0;i<clients.size();i++) {
+			if(!(name.equalsIgnoreCase(clients.get(i).getName()))){
+				clients.add(new Client(name, lastName, identification, advices, phoneNumber, address));
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	
-	public void setTypeAmount(int typeAmount) {
-		this.typesAmount=typeAmount;
+	public boolean updateClientName(String name, String finalName) {
+		for(int i=0; i<clients.size();i++) {
+			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				clients.get(i).setName(finalName);
+				return true;
+			}
+				
+		}
+		return false;
 	}
-	public void setSizeAmount(int sizeAmount) {
-		this.sizeAmount=sizeAmount;
+	
+	public boolean updateClientLastName(String name, String finalLastName) {
+		for(int i=0; i<clients.size();i++) {
+			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				clients.get(i).setLastName(finalLastName);
+				return true;
+			}
+				
+		}
+		return false;
 	}
 	
-	public boolean updatePrice(String name, double price) {
-		for(int i=0;i<productsList.size();i++) {
-			if(name.equalsIgnoreCase(productsList.get(i).getName())) {
-				productsList.get(i).setPrice(price);
+	public boolean updateID(String name, String newId) {
+		for(int i=0;i<clients.size();i++) {
+			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				clients.get(i).setIdentification(newId);
+				return true;
+			}
+		}
+		return false;	
+	}
+	
+	public boolean updateAdvice(String name, String newAdvice) {
+		for(int i=0;i<clients.size();i++) {
+			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				clients.get(i).setAdvices(newAdvice);
+				return true;
+			}
+		}
+		return false;	
+	}
+	
+	public boolean updatePhone(String name, String newPhone) {
+		for(int i=0;i<clients.size();i++) {
+			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				clients.get(i).setPhoneNumber(newPhone);
+				return true;
+			}
+		}
+		return false;	
+	}
+	
+	public boolean updateAdress(String name, String newAdress) {
+		for(int i=0;i<clients.size();i++) {
+			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				clients.get(i).setAdress(newAdress);
+				return true;
+			}
+		}
+		return false;	
+	}
+	
+	public boolean deleteClient(String name) {
+		for(int i=0;i<clients.size();i++) {
+			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				clients.remove(i);
 				return true;
 			}
 		}
 		return false;
-	}*/
+	}
+	
+	//Aqui empiezo a trabajar con lo relacionado a pedidos
 	
 	
 	public void sortArrayList(ArrayList<Products> a) {
