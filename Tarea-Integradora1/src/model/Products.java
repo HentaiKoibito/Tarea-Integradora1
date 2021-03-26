@@ -13,6 +13,7 @@ public class Products implements Comparable<Products> {
 		this.name=name;
 		this.price=price;
 		state=true;
+		this.type=type;
 	
 	}
 	public String getName() {
