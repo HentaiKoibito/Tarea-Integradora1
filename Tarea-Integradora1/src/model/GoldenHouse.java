@@ -11,6 +11,11 @@ private ArrayList<String> typesEnabled;
 private ArrayList<String> ingredients;
 private ArrayList<String> ingredientsEnabled;
 private ArrayList<Client> clients;
+private ArrayList<User> users;
+private ArrayList<Order> orders;
+
+
+
 
 	public GoldenHouse() {
 		productsList=new ArrayList<Products>();
@@ -20,6 +25,8 @@ private ArrayList<Client> clients;
 		ingredients=new ArrayList<String>();
 		ingredientsEnabled= ingredients;
 		clients=new ArrayList<Client>();
+		users=new ArrayList<User>();
+	
 		 
 	}
 	
@@ -292,86 +299,181 @@ private ArrayList<Client> clients;
 	public boolean addClient(String name, String lastName, String identification, String advices, String phoneNumber, String address){
 		for(int i=0;i<clients.size();i++) {
 			if(!(name.equalsIgnoreCase(clients.get(i).getName()))){
+				if(lastName.equalsIgnoreCase(clients.get(i).getLastName())) {
 				clients.add(new Client(name, lastName, identification, advices, phoneNumber, address));
 				return true;
+				}
 			}
 		}
 		return false;
 	}
 	
-	public boolean updateClientName(String name, String finalName) {
+	public boolean updateClientName(String name, String lastName, String finalName) {
 		for(int i=0; i<clients.size();i++) {
 			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				if(lastName.equalsIgnoreCase(clients.get(i).getLastName())) {
 				clients.get(i).setName(finalName);
 				return true;
+				}
 			}
 				
 		}
 		return false;
 	}
 	
-	public boolean updateClientLastName(String name, String finalLastName) {
+	public boolean updateClientLastName(String name, String lastName, String finalLastName) {
 		for(int i=0; i<clients.size();i++) {
 			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				if(lastName.equalsIgnoreCase(clients.get(i).getLastName())) {
 				clients.get(i).setLastName(finalLastName);
 				return true;
+				}
 			}
 				
 		}
 		return false;
 	}
 	
-	public boolean updateID(String name, String newId) {
+	public boolean updateID(String name, String lastName, String newId) {
 		for(int i=0;i<clients.size();i++) {
 			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				if(lastName.equalsIgnoreCase(clients.get(i).getLastName())) {
 				clients.get(i).setIdentification(newId);
 				return true;
+				}
 			}
 		}
 		return false;	
 	}
 	
-	public boolean updateAdvice(String name, String newAdvice) {
+	public boolean updateAdvice(String name, String lastName, String newAdvice) {
 		for(int i=0;i<clients.size();i++) {
 			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				if(lastName.equalsIgnoreCase(clients.get(i).getLastName())) {
 				clients.get(i).setAdvices(newAdvice);
 				return true;
+				}
 			}
 		}
 		return false;	
 	}
 	
-	public boolean updatePhone(String name, String newPhone) {
+	public boolean updatePhone(String name, String lastName, String newPhone) {
 		for(int i=0;i<clients.size();i++) {
 			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				if(lastName.equalsIgnoreCase(clients.get(i).getLastName())) {
 				clients.get(i).setPhoneNumber(newPhone);
 				return true;
+				}
 			}
 		}
 		return false;	
 	}
 	
-	public boolean updateAdress(String name, String newAdress) {
+	public boolean updateAdress(String name, String lastName, String newAdress) {
 		for(int i=0;i<clients.size();i++) {
 			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+				if(lastName.equalsIgnoreCase(clients.get(i).getLastName())) {
 				clients.get(i).setAdress(newAdress);
 				return true;
+				}
 			}
 		}
 		return false;	
 	}
 	
-	public boolean deleteClient(String name) {
+	public boolean deleteClient(String name, String lastName) {
 		for(int i=0;i<clients.size();i++) {
-			if(name.equalsIgnoreCase(clients.get(i).getName())) {
+			if(name.equalsIgnoreCase(clients.get(i).getName())&&(lastName.equalsIgnoreCase(clients.get(i).getLastName()))) {
 				clients.remove(i);
 				return true;
 			}
 		}
 		return false;
 	}
+	//Trabajo relacionado a los usuarios
 	
+	public boolean createUser(String name, String lastName, String identification, String username, String password) {
+		for(int i=0;i<users.size();i++) {
+			if((!(name.equalsIgnoreCase(users.get(i).getName())))&&(!(lastName.equalsIgnoreCase(users.get(i).getLastName())))) {
+				users.add(new User(name, lastName, identification, username, password));
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean updateUserName(String name, String lastName, String newName) {
+		for(int i=0;i<users.size();i++) {
+			if(name.equalsIgnoreCase(users.get(i).getName())&&(lastName.equalsIgnoreCase(users.get(i).getLastName()))) {
+				users.get(i).setName(newName);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean updateUserLastName(String name, String lastName, String newLastName) {
+		for(int i=0;i<users.size();i++) {
+			if(name.equalsIgnoreCase(users.get(i).getName())&&(lastName.equalsIgnoreCase(users.get(i).getLastName()))) {
+				users.get(i).setLastName(newLastName);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean updateUserID(String name, String lastName, String newID) {
+		for(int i=0;i<users.size();i++) {
+			if(name.equalsIgnoreCase(users.get(i).getName())&&(lastName.equalsIgnoreCase(users.get(i).getLastName()))) {
+				users.get(i).setIdentification(newID);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean updateUserUsername(String name, String lastName, String newUsername) {
+		for(int i=0;i<users.size();i++) {
+			if((name.equalsIgnoreCase(users.get(i).getName()))&&(lastName.equalsIgnoreCase(users.get(i).getLastName()))) {
+				users.get(i).setUsername(newUsername);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean updateUserPassword(String name, String lastName, String newPassword) {
+		for(int i=0;i<users.size();i++) {
+			if((name.equalsIgnoreCase(users.get(i).getName()))&&(lastName.equalsIgnoreCase(users.get(i).getLastName()))) {
+				users.get(i).setPassword(newPassword);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean deleteUser(String name, String lastName) {
+		for(int i=0;i<users.size();i++) {
+			if((name.equalsIgnoreCase(users.get(i).getName()))&&(lastName.equalsIgnoreCase(users.get(i).getLastName()))) {
+				users.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
 	//Aqui empiezo a trabajar con lo relacionado a pedidos
+	public boolean enterOrder(String code, String orderStatus, String observations, String name, String lastName, String identification, String currentStatus ) {
+		Order temp=new Order(code, orderStatus, observations, name, lastName, identification, currentStatus);
+		for(int i=0;i<orders.size();i++) {
+			if(!(code.equalsIgnoreCase(orders.get(i).getCode()))) {
+				orders.add(temp);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	
 	public void sortArrayList(ArrayList<Products> a) {

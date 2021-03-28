@@ -4,7 +4,7 @@ public class User extends Person {
 	private String username;
 	private String password;
 	
-	private User(String name, String lastName, String identification, String username, String password) {
+	public User(String name, String lastName, String identification, String username, String password) {
 		super(name, lastName, identification);
 		this.username = username;
 		this.password = password;
@@ -17,6 +17,9 @@ public class User extends Person {
 	}
 	public String getPassword() {
 		return password;
+	}
+	public void setPassword(String password) {
+		this.password=password;
 	}
 	@Override
 	public String getInformation() {
