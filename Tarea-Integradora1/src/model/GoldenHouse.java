@@ -781,8 +781,8 @@ private  String separator;
 	}
 	//Aqui empiezo a trabajar con lo relacionado a pedidos
 	//Falta el metodo de seleccionar los productos para una orden, ese se coloca en la UI
-	public boolean enterOrder(String code, String orderStatus, String observations, String name, String lastName, String identification, String currentStatus) throws FileNotFoundException, IOException {
-		Order temp=new Order(code, orderStatus, observations, name, lastName, identification, currentStatus);
+	public boolean enterOrder(String code, String orderStatus, String observations, String name, String lastName, String identification, String currentStatus, String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) throws FileNotFoundException, IOException {
+		Order temp=new Order(code, orderStatus, observations, name, lastName, identification, currentStatus, clientName, clientLastName, clientIdentification, clientAdvices, clientPhoneNumber, clientAdress);
 		if(orders.isEmpty()) {
 			orders.add(temp);
 			codeAmount.add(code);
@@ -822,22 +822,128 @@ private  String separator;
 		PrintWriter CSVW= new PrintWriter(filePath);
 		OrderInsertionSortByDate();
 		String titles= "Cliente"+separator+"Dirección"+separator+"Numero telefonico"+separator+"Codigo"+separator+"Observacion del cliente"+
-		"Empleado"+separator+"Estado del pedido"+separator+"Fecha de reporte";
+		"Empleado"+separator+"Estado del pedido"+separator+"Fecha de reporte"+separator+"Nombre producto"+separator+"cantidad por producto"+separator+"precio";
 		CSVW.println(titles);
+		
+		
 		for(int i=0;i<orders.size();i++) {
 			Order temp = orders.get(i);
 			LocalDateTime timeTemp= temp.getLocalDateTime();
-			if(timeTemp.isAfter(firstDate)&& timeTemp.isBefore(lastDate)) {
-				
+			if(timeTemp.isAfter(firstDate)&& timeTemp.isBefore(lastDate)){
+				setSeparator(separator);
+				CSVW.println(orders.get(i).getInformation(separator)+separator+orders.get(i).getOrderProductsInformation(separator));
 			}
 		}
 		
 	}
 	
-	public void SetSeparator(String separator) {
+	public void generateOrderDoneCSV(String filePath, String separator, LocalDateTime firstDate, LocalDateTime lastDate) throws FileNotFoundException{
+		PrintWriter CSVW= new PrintWriter(filePath);
+		OrderInsertionSortByDate();
+		String temp="Nombre Empleado"+separator+"ID"+separator+"Pedidos entregados"+separator+"Suma de los valores de pedidos";
+		CSVW.println(temp);
+		int c=0;
+		double d=0;
+		for(int i=0;i<orders.size();i++) {
+			
+			Order aux= orders.get(i);
+			c=amountOfOrdersByEmployee(aux.getOrderEmployee().getName(),aux.getOrderEmployee().getLastName());
+			d=quantityOfOrdersByEmployee(aux.getOrderEmployee().getName(),aux.getOrderEmployee().getLastName());
+			if("ENTREGADO".equalsIgnoreCase(aux.getCurrentStatus())) {
+			LocalDateTime a=aux.getLocalDateTime();
+				if(a.isAfter(firstDate)&&(a.isBefore(lastDate))) {
+					setSeparator(separator);
+					CSVW.println(aux.getEmployeeInformation(separator)+c+separator+d);
+				}
+		}
+	}
+		
+	}
+	
+	public int amountOfOrdersByEmployee(String name, String lastName) {
+		int a=0;
+		String b="ENTREGADO";
+		for(int i=0;i<orders.size();i++) {
+			if((name.equalsIgnoreCase(orders.get(i).getOrderEmployee().getName())&&(lastName.equalsIgnoreCase(orders.get(i).getOrderEmployee().getLastName())))){
+				if(b.equalsIgnoreCase(orders.get(i).getCurrentStatus())) {
+					a++;
+				}
+			}
+		}
+		return a;
+	}
+	public double quantityOfOrdersByEmployee(String name, String lastName) {
+		double a=0;
+		String b="ENTREGADO";
+		for(int i=0;i<orders.size();i++) {
+			if((name.equalsIgnoreCase(orders.get(i).getOrderEmployee().getName())&&(lastName.equalsIgnoreCase(orders.get(i).getOrderEmployee().getLastName())))){
+				if(b.equalsIgnoreCase(orders.get(i).getCurrentStatus())) {
+					a+=orders.get(i).orderPrize();
+				}
+			}
+		}
+		return a;
+	}
+	
+	public void setSeparator(String separator) {
 		this.separator=separator;
 	}
 	
+	public void generateProductsCSV(String filePath, String separator, LocalDateTime firstDate, LocalDateTime lastDate) throws FileNotFoundException{
+		PrintWriter CSVW= new PrintWriter(filePath);
+		OrderInsertionSortByDate();
+		String temp="Nombre Producto"+separator+"Tipo de producto"+separator+"Ingredients"+separator+"Tamaño de producto"+separator+"Precio"+separator+"Veces que se pide"+separator+"Cantidad de dinero que generó";
+		CSVW.println(temp);
+		int c=0;
+		double d=0;
+		for(int i=0;i<orders.size();i++) {
+			
+			Order aux= orders.get(i);
+			c=amountOfProductssByOrders(aux.getProducts().get(i).getName());
+			d=quantityOfProductsByOrders(aux.getProducts().get(i).getName());
+			if("ENTREGADO".equalsIgnoreCase(aux.getCurrentStatus())) {
+			LocalDateTime a=aux.getLocalDateTime();
+				if(a.isAfter(firstDate)&&(a.isBefore(lastDate))) {
+					setSeparator(separator);
+					CSVW.println(aux.getProductsInformation(separator)+c+separator+d);
+				}
+		}
+	}
+		
+	}
+	
+	public int amountOfProductssByOrders(String name) {
+		int a=0;
+		String b="ENTREGADO";
+		for(int i=0;i<orders.size();i++) {
+			for(int j=0;j<orders.get(i).getProducts().size();j++) {
+			if((name.equalsIgnoreCase(orders.get(i).getProducts().get(j).getName()))){
+				if(b.equalsIgnoreCase(orders.get(i).getCurrentStatus())) {
+					a++;
+				}
+			}
+		}
+		}
+		return a;
+	}
+	
+	public double quantityOfProductsByOrders(String name) {
+		double a=0;
+		String b="ENTREGADO";
+		for(int i=0;i<orders.size();i++) {
+			for(int j=0;j<orders.get(i).getProducts().size();j++){
+			if((name.equalsIgnoreCase(orders.get(i).getProducts().get(j).getName()))){
+				if(b.equalsIgnoreCase(orders.get(i).getCurrentStatus())) {
+					a+=orders.get(i).orderPrize();
+				}
+			}
+		}
+	}
+		return a;
+	}
+	
+	
+	//ORDENAMIENTOS
 	public void sortPerson(ArrayList<Client> a) {
 		Collections.sort(a, new NameComparator());
 	}

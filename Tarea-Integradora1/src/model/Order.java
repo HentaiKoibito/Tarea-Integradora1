@@ -15,19 +15,21 @@ public class Order implements Serializable{
 	private ArrayList<Products> orderProducts;
 	private int[] amountPerProducts;
 	private Employee orderEmployee;
+	private Client orderClient;
 	private String[] statusOrder={"SOLICITADO", "ENPROCESO", "ENVIADO", "ENTREGADO", "CANCELADO"};
 	private String currentStatus;
 	private LocalDateTime date; 
 	private DateTimeFormatter dtf;
 	private String dateString;
 	
-	public Order(String code, String orderStatus, String observations, String name, String lastName, String identification, String currentStatus) {
+	public Order(String code, String orderStatus, String observations, String name, String lastName, String identification, String currentStatus,String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) {
 		code=setCode();
 		this.orderStatus=orderStatus;
 		this.observations=observations;
 		orderProducts=new ArrayList<Products>();
 		amountPerProducts=new int[orderProducts.size()];
 		orderEmployee=new Employee(name, lastName, identification);
+		orderClient=new Client(clientName, clientLastName, clientIdentification, clientAdvices, clientPhoneNumber, clientAdress);
 		this.currentStatus=statusOrder[0];
 		date=LocalDateTime.now();
 		dtf=DateTimeFormatter.ofPattern("MMMM dd, YYYY:HH:mm");
@@ -35,6 +37,9 @@ public class Order implements Serializable{
 		
 		
 	}
+	
+
+	
 	public LocalDateTime getLocalDateTime() {
 		return date;
 	}
@@ -119,20 +124,50 @@ public class Order implements Serializable{
 	
 	public String getInformation(String separator) {
 		String temp="";
-		temp=code+separator+observations+separator+orderEmployee.getName()+separator+currentStatus;
+		temp=orderClient.getFullName()+separator+orderClient.getAdress()+separator+orderClient.getPhoneNumber()+separator+observations+separator+orderEmployee.getName()+separator+currentStatus;
 		return temp;
 		
 	}
 	
 	public String getOrderProductsInformation(String separator) {
 		String temp="";
-		temp="Nombre producto"+separator+"cantidad por producto"+separator+"precio"+"\n";
 				for(int i=0;i<orderProducts.size();i++) {
 					
 						temp+=orderProducts.get(i).getName()+separator+amountPerProducts[i]+separator+orderProducts.get(i).getPrice();
 				}
 				return temp;
 	}
+	
+	public String getEmployeeInformation(String separator) {
+		String temp="";
+		for(int i=0;i<orderProducts.size();i++) {
+			temp+=orderEmployee.getFullName()+separator+orderEmployee.getIdentification()+separator;
+		}
+		return temp;
+	}
+	
+	public String getProductsInformation(String separator) {
+		String temp="";
+		for(int i=0;i<orderProducts.size();i++) {
+			temp+=orderProducts.get(i).getName()+separator+orderProducts.get(i).getType()+separator+orderProducts.get(i).getAllIngredients(separator)+
+					separator+orderProducts.get(i).getPrice()+separator;
+		}
+		return temp;
+	}
+	
+	public double orderPrize() {
+		double a=0;
+		String b="ENTREGADO";
+		for(int i=0;i<orderProducts.size();i++) {
+				if(b.equalsIgnoreCase(currentStatus)) {
+					a+=orderProducts.get(i).getPrice();
+				}
+			}
+		return a;
+		
+	}
+	
+	
 	
 	
 }

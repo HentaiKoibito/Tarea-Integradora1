@@ -21,6 +21,16 @@ public class Products implements Comparable<Products>, Serializable {
 		this.size=size;
 	
 	}
+	
+	public String getAllIngredients(String separator) {
+		String temp="(";
+		for(int i=0;i<ingredients.length-1;i++) {
+			temp+=ingredients[i]+separator;
+		}
+		temp+=ingredients[ingredients.length];
+		String a=temp+")";
+		return a;
+	}
 	public String getName() {
 		return name;
 	}

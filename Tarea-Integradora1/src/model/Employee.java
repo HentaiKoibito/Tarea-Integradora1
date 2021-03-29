@@ -10,6 +10,11 @@ public class Employee extends Person implements Serializable{
 		super(name, lastName, identification);
 		
 	}
+	
+	public String getFullName() {
+		String a=getName()+getLastName();
+		return a;
+	}
 
 	@Override
 	public String getInformation() {
