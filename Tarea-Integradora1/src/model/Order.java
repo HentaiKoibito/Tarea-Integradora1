@@ -23,7 +23,7 @@ public class Order implements Serializable{
 	private String dateString;
 	
 	
-	public Order(String code, String []statusOrder, String observations, String name, String lastName, String identification, String currentStatus,String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) {
+	public Order(String code, String observations, String name, String lastName, String identification, String currentStatus,String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) {
 		code=setCode();
 		this.code=code;
 		this.observations=observations;

@@ -23,12 +23,12 @@ public class Products implements Comparable<Products>, Serializable {
 	}
 	
 	public String getAllIngredients(String separator) {
-		String temp="(";
+		String temp="";
 		for(int i=0;i<ingredients.length-1;i++) {
 			temp+=ingredients[i]+separator;
 		}
 		temp+=ingredients[ingredients.length];
-		String a=temp+")";
+		String a=temp+"";
 		return a;
 	}
 	public String getName() {

@@ -1,9 +1,11 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -781,8 +783,8 @@ private  String separator;
 	}
 	//Aqui empiezo a trabajar con lo relacionado a pedidos
 	//Falta el metodo de seleccionar los productos para una orden, ese se coloca en la UI
-	public boolean enterOrder(String code, String[] statusOrder, String observations, String name, String lastName, String identification, String currentStatus, String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) throws FileNotFoundException, IOException {
-		Order temp=new Order(code,statusOrder, observations, name, lastName, identification, currentStatus, clientName, clientLastName, clientIdentification, clientAdvices, clientPhoneNumber, clientAdress);
+	public boolean enterOrder(String code, String observations, String name, String lastName, String identification, String currentStatus, String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) throws FileNotFoundException, IOException {
+		Order temp=new Order(code, observations, name, lastName, identification, currentStatus, clientName, clientLastName, clientIdentification, clientAdvices, clientPhoneNumber, clientAdress);
 		if(orders.isEmpty()) {
 			orders.add(temp);
 			codeAmount.add(code);
@@ -941,9 +943,108 @@ private  String separator;
 	}
 		return a;
 	}
+//Metodos nuevos
+	//Reportes
+	
+	
+	public String generateProductsReport(String separator) {
+		String temp="Nombre;TipoDePlato;Ingredientes;Tamaño;Precio;Estado\n";
+		String a="";
+		for(int i=0;i<productsList.size();i++) {
+			a+=productsList.get(i).getName()+";"+productsList.get(i).getType()+";"+productsList.get(i).getAllIngredients(separator)+";"+productsList.get(i).getSize()+";"+productsList.get(i).getPrice()+";"+stateSetter(productsList.get(i).getState())+"\n";
+		}
+		return temp=temp+a;
+	}
+	
+	public String stateSetter(boolean a) {
+		String b;
+		if(a==true) {
+			return b="Activo";
+		}
+		return b="Inactivo";
+	}
+	
+	//Imports
+	public void importDataClients(String filePath) throws IOException {
+		BufferedReader br=new BufferedReader(new FileReader(filePath));
+		String line= br.readLine();
+		while(line!=null){
+		      String[] parts = line.split(";");
+		      addClient(parts[0],parts[1], parts[2],parts[3],parts[4], parts[5]);
+		      line = br.readLine();
+		    }
+		    br.close();
+		
+	}
+	
+	public void importDataProducts(String filePath) throws IOException {
+		BufferedReader br=new BufferedReader(new FileReader(filePath));
+		String line=br.readLine();
+		while(line!=null){
+		      String[] parts = line.split(";");
+		      createProduct(parts[0], parts[1], splitIngredients(parts[2]),parts[3],StringToDouble(parts[4]), convertStringToBoolean(parts[5]));
+		      line = br.readLine();
+		    }
+		    br.close();
+	}
+	
+	public void importDataOrders(String filePath) throws IOException {
+		BufferedReader br=new BufferedReader(new FileReader(filePath));
+		String line=br.readLine();
+		while(line!=null){
+		      String[] parts = line.split(";");
+		     enterOrder(parts[0], parts[1], parts[2],parts[3],parts[4], parts[5],parts[6], parts[7], parts[8],parts[9],parts[10], parts[11]);
+		      line = br.readLine();
+		    }
+		    br.close();
+	}
+	
+	public String[] splitIngredients(String a) {
+		String[] b= a.split(";");
+		return b;
+	}
+	
+	public boolean convertStringToBoolean(String a) {
+		boolean temp;
+		if("TRUE".equalsIgnoreCase(a)) {
+			temp=true;
+		}
+		else {
+			temp=false;
+		}
+		return temp;
+	}
+	
+	public double StringToDouble(String a) {
+		double b;
+		b=Double.parseDouble(a);
+		return b;
+	}
+	
+	//Logearse
+	
+	public String login(String username, String password) {
+		String a;
+		for(int i=0;i<users.size();i++) {
+		if(username.equalsIgnoreCase((users.get(i).getUsername()))) {
+			if(password.equalsIgnoreCase(users.get(i).getPassword())) {
+				return a="true";
+			}
+			else {
+				return a="contraseña incorrecta";
+			}
+			
+		}
+		else {
+			return a="Usuario incorrecto, registrese o intentelo de nuevo";
+		}
+		}
+		return a="false";
+	}
 	
 	
 	//ORDENAMIENTOS
+	
 	public void sortPerson(ArrayList<Client> a) {
 		Collections.sort(a, new NameComparator());
 	}
