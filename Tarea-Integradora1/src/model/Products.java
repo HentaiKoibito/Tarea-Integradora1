@@ -13,7 +13,7 @@ public class Products implements Comparable<Products>, Serializable {
 	public boolean state;
 	
 	
-	public Products (String name, String type, String[] ingredients, String size, double price, boolean state) {
+	public Products (String name, String type, String[] ingredients, String size, double price) {
 		this.name=name;
 		this.price=price;
 		state=true;

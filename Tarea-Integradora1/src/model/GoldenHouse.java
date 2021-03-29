@@ -276,8 +276,8 @@ private  String separator;
 	
 	
 	//Productos
-	public boolean createProduct(String name, String type, String[] ingredients, String size, double price, boolean state) throws FileNotFoundException, IOException {
-		Products productsTemp=new Products(name, type, ingredients, size, price, state);
+	public boolean createProduct(String name, String type, String[] ingredients, String size, double price) throws FileNotFoundException, IOException {
+		Products productsTemp=new Products(name, type, ingredients, size, price);
 		if(productsList.isEmpty()) {
 			productsList.add(productsTemp);
 			saveProductsData();
@@ -982,7 +982,7 @@ private  String separator;
 		String line=br.readLine();
 		while(line!=null){
 		      String[] parts = line.split(";");
-		      createProduct(parts[0], parts[1], splitIngredients(parts[2]),parts[3],StringToDouble(parts[4]), convertStringToBoolean(parts[5]));
+		      createProduct(parts[0], parts[1], splitIngredients(parts[2]),parts[3],StringToDouble(parts[4]));
 		      line = br.readLine();
 		    }
 		    br.close();
