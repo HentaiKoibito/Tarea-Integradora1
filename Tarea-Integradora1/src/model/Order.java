@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Order implements Serializable {
+public class Order implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private String code;
@@ -116,5 +116,23 @@ public class Order implements Serializable {
 		}
 		return currentStatus;
 	}
+	
+	public String getInformation(String separator) {
+		String temp="";
+		temp=code+separator+observations+separator+orderEmployee.getName()+separator+currentStatus;
+		return temp;
+		
+	}
+	
+	public String getOrderProductsInformation(String separator) {
+		String temp="";
+		temp="Nombre producto"+separator+"cantidad por producto"+separator+"precio"+"\n";
+				for(int i=0;i<orderProducts.size();i++) {
+					
+						temp+=orderProducts.get(i).getName()+separator+amountPerProducts[i]+separator+orderProducts.get(i).getPrice();
+				}
+				return temp;
+	}
+	
 	
 }

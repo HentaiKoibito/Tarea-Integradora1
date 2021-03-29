@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ private final static String TYPESENABLED_SAVE_PATH_FILE="data/TypesEnabled.muc";
 private final static String TYPES_SAVE_PATH_FILE="data/Types.muc";
 private final static String CODES_SAVE_PATH_FILE="data/Codes.muc";
 private final static String DATES_SAVE_PATH_FILE="data/Dates.muc";
+private  String separator;
 
 
 
@@ -55,6 +57,8 @@ private final static String DATES_SAVE_PATH_FILE="data/Dates.muc";
 		users=new ArrayList<User>();
 		codeAmount=new ArrayList<String>();
 		dates=new ArrayList<LocalDateTime>();
+		separator=";";
+		
 	
 		 
 	}
@@ -776,6 +780,7 @@ private final static String DATES_SAVE_PATH_FILE="data/Dates.muc";
 		return false;
 	}
 	//Aqui empiezo a trabajar con lo relacionado a pedidos
+	//Falta el metodo de seleccionar los productos para una orden, ese se coloca en la UI
 	public boolean enterOrder(String code, String orderStatus, String observations, String name, String lastName, String identification, String currentStatus) throws FileNotFoundException, IOException {
 		Order temp=new Order(code, orderStatus, observations, name, lastName, identification, currentStatus);
 		if(orders.isEmpty()) {
@@ -812,6 +817,27 @@ private final static String DATES_SAVE_PATH_FILE="data/Dates.muc";
 		return false;
 	}
 	
+	//CSV
+	public void generateOrderCSV(String filePath, String separator, LocalDateTime firstDate, LocalDateTime lastDate) throws FileNotFoundException {
+		PrintWriter CSVW= new PrintWriter(filePath);
+		OrderInsertionSortByDate();
+		String titles= "Cliente"+separator+"Dirección"+separator+"Numero telefonico"+separator+"Codigo"+separator+"Observacion del cliente"+
+		"Empleado"+separator+"Estado del pedido"+separator+"Fecha de reporte";
+		CSVW.println(titles);
+		for(int i=0;i<orders.size();i++) {
+			Order temp = orders.get(i);
+			LocalDateTime timeTemp= temp.getLocalDateTime();
+			if(timeTemp.isAfter(firstDate)&& timeTemp.isBefore(lastDate)) {
+				
+			}
+		}
+		
+	}
+	
+	public void SetSeparator(String separator) {
+		this.separator=separator;
+	}
+	
 	public void sortPerson(ArrayList<Client> a) {
 		Collections.sort(a, new NameComparator());
 	}
@@ -819,5 +845,21 @@ private final static String DATES_SAVE_PATH_FILE="data/Dates.muc";
 		Collections.sort(a);
 	}
 	
+	public void OrderInsertionSortByDate(){                                            
+		int j=0;
+		Order aux;
+		DateComparator sorter=new DateComparator();
+		for (int i = 1; i <orders.size(); i++){
+			aux = orders.get(i);        
+			j = i - 1;           
+			while ((j >= 0) && (sorter.compare(aux, orders.get(j)))<0){                             
+				orders.set(j+1,orders.get(j));
+				j--;        
+			}
+			orders.set(j+1, aux);
+		}
+	}
 	
-}
+	
+	}
+
