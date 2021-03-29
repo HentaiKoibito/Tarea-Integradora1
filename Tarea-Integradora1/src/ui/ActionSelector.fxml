@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitMenuButton layoutX="35.0" layoutY="126.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #cfc50b; -fx-region-background: #cfc50b; -fx-border-color: #cfc50b; -fx-border-color: #cfc50b; -fx-alignment: #cfc50b; -fx-border-color: #cfc50b; -fx-graphic: #cfc50b; -fx-font: #cfc50b;" text="Menu">
+        <items>
+          <MenuItem mnemonicParsing="false" style="-fx-background-color: #0000;">
+               <graphic>
+                  <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#gestionarClientes" text="Clientes" />
+                        <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Usuarios" />
+                      <MenuItem mnemonicParsing="false" onAction="#gestionarProductos" text="Productos" />
+                      <MenuItem mnemonicParsing="false" onAction="#gestionarIngredientes" text="Ingredientes" />
+                        <MenuItem mnemonicParsing="false" onAction="#gestionarTiposDePlato" text="Tipos de plato" />
+                    </items>
+                  </SplitMenuButton>
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Resgistrar">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#registrarPedido" text="Pedido" />
+                        <MenuItem mnemonicParsing="false" onAction="#registrarCambiarEstadoDePedido" text="Cambiar estado de pedido" />
+                     </items>
+                  </SplitMenuButton>
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Generar Formularios">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#generarFormulariosOrdenes" text="Ordenes" />
+                        <MenuItem mnemonicParsing="false" onAction="#generarFormulariosProductos" text="Productos" />
+                        <MenuItem mnemonicParsing="false" onAction="#generarFormularioIngredientes" text="Ingredientes" />
+                        <MenuItem mnemonicParsing="false" onAction="#generarFormulariosClientes" text="Clientes" />
+                        <MenuItem mnemonicParsing="false" onAction="#generarFormulariosUsuarios" text="Usuarios" />
+                        <MenuItem mnemonicParsing="false" onAction="#generarFormulariosEmpleados" text="Empleados" />
+                     </items>
+                  </SplitMenuButton>
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Generar csv">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#generarCsvOrdenes" text="Ordenes" />
+                        <MenuItem mnemonicParsing="false" onAction="#generarCsvEmpleados" text="Empleados" />
+                        <MenuItem mnemonicParsing="false" onAction="#generarCsvProductos" text="Productos" />
+                        <MenuItem mnemonicParsing="false" onAction="#generarCsvTipoDeSeparador" text="Tipo de separador" />
+                     </items>
+                  </SplitMenuButton>
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Importar csv">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#importarCsvClientes" text="Clientes" />
+                        <MenuItem mnemonicParsing="false" onAction="#importarCsvProductos" text="Productos" />
+                        <MenuItem mnemonicParsing="false" onAction="#importarCsvPedidos" text="Pedidos" />
+                     </items>
+                  </SplitMenuButton>
+               </graphic>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Listar">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#listarProductos" text="Productos" />
+                        <MenuItem mnemonicParsing="false" onAction="#listarIngredientes" text="Ingredientes" />
+                     </items>
+                  </SplitMenuButton>
+               </graphic>
+            </MenuItem>
+        </items>
+      </SplitMenuButton>
+      <ImageView fitHeight="119.0" fitWidth="484.0" layoutX="58.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Imágenes/lacasadoradalogo.jfif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="247.0" fitWidth="335.0" layoutX="184.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Imágenes/lacasadoradalogo2.jfif" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
