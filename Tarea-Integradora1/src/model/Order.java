@@ -1,8 +1,14 @@
 package model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Order {
+public class Order implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private String code;
 	private String orderStatus;
 	private String listOfProducts;
@@ -10,25 +16,45 @@ public class Order {
 	private ArrayList<Products> orderProducts;
 	private int[] amountPerProducts;
 	private Employee orderEmployee;
-	private String[] statusOrder={"SOLICITADO", "ENPROCESO", "ENVIADO", "ENTREGADO"};
+	private String[] statusOrder={"SOLICITADO", "ENPROCESO", "ENVIADO", "ENTREGADO", "CANCELADO"};
 	private String currentStatus;
+	private LocalDateTime date; 
+	private DateTimeFormatter dtf;
+	private String dateString;
 	
 	public Order(String code, String orderStatus, String observations, String name, String lastName, String identification, String currentStatus) {
-		this.code=code;
+		code=setCode();
 		this.orderStatus=orderStatus;
 		this.observations=observations;
 		orderProducts=new ArrayList<Products>();
 		amountPerProducts=new int[orderProducts.size()];
 		orderEmployee=new Employee(name, lastName, identification);
-		this.currentStatus=currentStatus;
+		this.currentStatus=statusOrder[0];
+		date=LocalDateTime.now();
+		dtf=DateTimeFormatter.ofPattern("MMMM dd, YYYY:HH:mm");
+		dateString=dtf.format(date);
+		
 		
 	}
+	public LocalDateTime getLocalDateTime() {
+		return date;
+	}
+	
+	public DateTimeFormatter getDateTimeFormatter() {
+		return dtf;
+	}
+	
+	public String getDateString() {
+		return dateString;
+	}
+	
 	public String getCode() {
 		return code;
 	}
 
-	public void setCode() {
-		code=(int)Math.random()*99999+"";
+	public String setCode() {
+		code="Order"+(int)Math.random()*99999+"";
+		return code;
 	}
 	public String getOrderStatus() {
 		return orderStatus;
@@ -69,7 +95,8 @@ public class Order {
 	public String getCurrentStatus() {
 		return currentStatus;
 	}
-	public void setCurrentStatus(int indicator) {
+	//
+	public String setCurrentStatus(int indicator, String currentStatus) {
 		switch(indicator) {
 		
 		case 1: 
@@ -84,6 +111,11 @@ public class Order {
 		case 4:
 			currentStatus=statusOrder[3];
 			break;
+		case 5:
+			currentStatus=statusOrder[4];
+			break;
 		}
+		return currentStatus;
 	}
+	
 }
