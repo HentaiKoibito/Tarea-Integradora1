@@ -62,7 +62,7 @@ private  String separator;
 	
 		 
 	}
-
+//Serialización
 	
 	public void saveProductsData() throws FileNotFoundException, IOException {
 		ObjectOutputStream writer= new ObjectOutputStream(new FileOutputStream(PRODUCTS_SAVE_PATH_FILE));
