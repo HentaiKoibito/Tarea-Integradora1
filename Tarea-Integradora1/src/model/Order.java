@@ -12,7 +12,6 @@ public class Order implements Serializable{
 	private String orderStatus;
 	private String listOfProducts;
 	private String observations;
-<<<<<<< HEAD
 	private ArrayList<Products> orderProducts;
 	private int[] amountPerProducts;
 	private Employee orderEmployee;
@@ -23,16 +22,10 @@ public class Order implements Serializable{
 	private DateTimeFormatter dtf;
 	private String dateString;
 	
-	public Order(String code, String orderStatus, String observations, String name, String lastName, String identification, String currentStatus,String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) {
+	
+	public Order(String code, String []statusOrder, String observations, String name, String lastName, String identification, String currentStatus,String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) {
 		code=setCode();
-		this.orderStatus=orderStatus;
-=======
-
-	public Order(String code, String[] condition, String listOfProducts, String observations) {
 		this.code=code;
-		this.condition=condition;
-		this.listOfProducts=listOfProducts;
->>>>>>> branch 'master' of https://github.com/HentaiKoibito/Tarea-Integradora1.git
 		this.observations=observations;
 		orderProducts=new ArrayList<Products>();
 		amountPerProducts=new int[orderProducts.size()];
@@ -42,9 +35,10 @@ public class Order implements Serializable{
 		date=LocalDateTime.now();
 		dtf=DateTimeFormatter.ofPattern("MMMM dd, YYYY:HH:mm");
 		dateString=dtf.format(date);
-		
-		
 	}
+		
+		
+	
 	
 
 	

@@ -781,8 +781,8 @@ private  String separator;
 	}
 	//Aqui empiezo a trabajar con lo relacionado a pedidos
 	//Falta el metodo de seleccionar los productos para una orden, ese se coloca en la UI
-	public boolean enterOrder(String code, String orderStatus, String observations, String name, String lastName, String identification, String currentStatus, String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) throws FileNotFoundException, IOException {
-		Order temp=new Order(code, orderStatus, observations, name, lastName, identification, currentStatus, clientName, clientLastName, clientIdentification, clientAdvices, clientPhoneNumber, clientAdress);
+	public boolean enterOrder(String code, String[] statusOrder, String observations, String name, String lastName, String identification, String currentStatus, String clientName, String clientLastName, String clientIdentification, String clientAdvices, String clientPhoneNumber, String clientAdress) throws FileNotFoundException, IOException {
+		Order temp=new Order(code,statusOrder, observations, name, lastName, identification, currentStatus, clientName, clientLastName, clientIdentification, clientAdvices, clientPhoneNumber, clientAdress);
 		if(orders.isEmpty()) {
 			orders.add(temp);
 			codeAmount.add(code);
