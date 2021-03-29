@@ -1042,7 +1042,7 @@ private  String separator;
 		return a="false";
 	}
 	
-	
+	//metodos nuevos fin
 	//ORDENAMIENTOS
 	
 	public void sortPerson(ArrayList<Client> a) {
