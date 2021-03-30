@@ -197,12 +197,48 @@ public class ControllerClassGUI {
 
     @FXML
     void gestionarActualizarTipo(ActionEvent event) {
-
+    	
     }
 
     @FXML
-    void gestionarAñadirIngredientes(ActionEvent event) {
+    void gestionarAñadirIngredientes(ActionEvent event) throws IOException {
+    	FXMLLoader a= new FXMLLoader(getClass().getResource("IngredientsCreator.fxml"));
+    	a.setController(this);
+    	Parent b= a.load();
+    	BorderPane.getChildren().setAll(b);
+    }
+    @FXML
+    private TableView<String> ingredientsCreateTbv;
 
+    @FXML
+    private TableColumn<ObservableList<String>, String> ingredientsCreateCol1tbv;
+
+    @FXML
+    private TextField ingredientCreatorNametxt;
+
+    @FXML
+    void CrearIngredientesbtn(ActionEvent event) throws FileNotFoundException, IOException {
+    	if(GH.createIngredient(ingredientCreatorNametxt.getText())) {
+    		GH.saveIngredientData();
+    		GH.saveIngredientEnabledData();
+    	}
+    	
+    }
+
+    @FXML
+    void VolverIngredientesCreatorbtn(ActionEvent event) throws IOException {
+    	FXMLLoader a= new FXMLLoader(getClass().getResource("ActionSelector.fxml"));
+    	a.setController(this);
+    	Parent b= a.load();
+    	BorderPane.getChildren().setAll(b);
+    }
+
+    @SuppressWarnings("unchecked")
+	@FXML
+    void ingredientsCreateTbvStart(ActionEvent event) {
+    	ObservableList<String> ingredients=FXCollections.observableArrayList();
+    	ingredients=(ObservableList<String>) GH.getIngredients();
+    	ingredientsCreateTbv.setItems(ingredients);
     }
 
     @FXML
@@ -216,7 +252,37 @@ public class ControllerClassGUI {
     }
 
     @FXML
-    void gestionarDeshabilitarIngredientes(ActionEvent event) {
+    void gestionarDeshabilitarIngredientes(ActionEvent event) throws IOException {
+    	FXMLLoader a= new FXMLLoader(getClass().getResource("IngredientsDisabler.fxml"));
+    	a.setController(this);
+    	Parent b= a.load();
+    	BorderPane.getChildren().setAll(b);
+    }
+    
+    @FXML
+    private TableView<String> ingredientsDisableTbv;
+
+    @FXML
+    private TableColumn<ObservableList<String>, String> ingredientsDisableCol1tbv;
+
+    @FXML
+    private TextField ingredientDisablerNametxt;
+
+    @FXML
+    void CrearIngredientesDisablebtn(ActionEvent event) throws FileNotFoundException, IOException {
+    	if(GH.disableIngredients(ingredientDisablerNametxt.getText())) {
+    		GH.saveIngredientData();
+    		GH.saveIngredientEnabledData();
+    	}
+    }
+
+    @FXML
+    void VolverIngredientesDisablebtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ingredientsDisableTbvStart(ActionEvent event) {
 
     }
 
@@ -236,8 +302,11 @@ public class ControllerClassGUI {
     }
 
     @FXML
-    void gestionarEliminatIngredientes(ActionEvent event) {
-
+    void gestionarEliminatIngredientes(ActionEvent event) throws IOException {
+    	FXMLLoader a= new FXMLLoader(getClass().getResource("IngredientsDeleter.fxml"));
+    	a.setController(this);
+    	Parent b= a.load();
+    	BorderPane.getChildren().setAll(b);
     }
     
     @FXML
@@ -249,12 +318,14 @@ public class ControllerClassGUI {
     @FXML
     private TextField ingredientDeleteNametxt;
 
-    @FXML
-    private TextField newIngredientDeleteNametxt;
+ 
 
     @FXML
-    void EliminarIngredientesbtn(ActionEvent event) {
-
+    void EliminarIngredientesbtn(ActionEvent event) throws FileNotFoundException, IOException {
+    	if(GH.deleteIngredients(ingredientDeleteNametxt.getText())) {
+    		GH.saveIngredientData();
+    		GH.saveIngredientEnabledData();
+    	}
     }
 
     @SuppressWarnings("unchecked")

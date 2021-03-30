@@ -53,7 +53,12 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Button layoutX="233.0" layoutY="349.0" mnemonicParsing="false" onAction="#registerbtn" prefHeight="25.0" prefWidth="139.0" text="REGISTRAR" textFill="#cfc50b">
+            <Button layoutX="336.0" layoutY="348.0" mnemonicParsing="false" onAction="#registerbtn" prefHeight="25.0" prefWidth="139.0" text="REGISTRAR" textFill="#cfc50b">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="94.0" layoutY="348.0" mnemonicParsing="false" onAction="#turnbackbtn" prefHeight="25.0" prefWidth="139.0" text="Volver" textFill="#cfc50b">
                <font>
                   <Font size="15.0" />
                </font>

@@ -5,12 +5,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitMenuButton layoutX="65.0" layoutY="133.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #cfc50b; -fx-region-background: #cfc50b; -fx-border-color: #cfc50b; -fx-border-color: #cfc50b; -fx-alignment: #cfc50b; -fx-border-color: #cfc50b; -fx-graphic: #cfc50b; -fx-font: #cfc50b;" text="Menu">
+      <SplitMenuButton layoutX="35.0" layoutY="135.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #cfc50b; -fx-region-background: #cfc50b; -fx-border-color: #cfc50b; -fx-border-color: #cfc50b; -fx-alignment: #cfc50b; -fx-border-color: #cfc50b; -fx-graphic: #cfc50b; -fx-font: #cfc50b;" text="Menu">
         <items>
-          <MenuItem mnemonicParsing="false" style="-fx-background-color: #0000;">
+          <MenuItem mnemonicParsing="false" style="-fx-background-color: #0000;" text="A">
                <graphic>
                   <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
                     <items>
@@ -18,9 +19,9 @@
                            <graphic>
                               <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
                                  <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#gestionarClientes" text="Añadir" />
-                                    <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Eliminar" />
-                                    <MenuItem mnemonicParsing="false" onAction="#gestionarProductos" text="Actualizar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarañadirClientes" text="Añadir" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionareliminatclientes" text="Eliminar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionaractualizarclientes" text="Actualizar" />
                                  </items>
                               </SplitMenuButton>
                            </graphic></MenuItem>
@@ -28,22 +29,53 @@
                            <graphic>
                               <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
                                  <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#gestionarClientes" text="Añadir" />
-                                    <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Eliminar" />
-                                    <MenuItem mnemonicParsing="false" onAction="#gestionarProductos" text="Actualizar" />
-                                    <MenuItem mnemonicParsing="false" onAction="#gestionarIngredientes" text="Desabilitar" />
-                                    <MenuItem mnemonicParsing="false" onAction="#gestionarIngredientes" text="Desabilitar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarAñadirUsuarios" text="Añadir" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarEliminarUsuarios" text="Eliminar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionaractualizarusuarios" text="Actualizar" />
                                  </items>
                               </SplitMenuButton>
                            </graphic></MenuItem>
-                      <MenuItem mnemonicParsing="false" onAction="#gestionarProductos" text="Productos" />
-                      <MenuItem mnemonicParsing="false" onAction="#gestionarIngredientes" text="Ingredientes" />
-                        <MenuItem mnemonicParsing="false" onAction="#gestionarTiposDePlato" text="Tipos de plato" />
+                        <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Productos">
+                           <graphic>
+                              <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarañadirProductos" text="Añadir" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarEliminarProductos" text="Eliminar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionaractualizarProductos" text="Actualizar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionardeshabilitarproductos" text="Deshabilitar" />
+                                 </items>
+                              </SplitMenuButton>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Ingredientes">
+                           <graphic>
+                              <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarAñadirIngredientes" text="Añadir" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarEliminatIngredientes" text="Eliminar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarActualizarIngredientes" text="Actualizar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarDeshabilitarIngredientes" text="Deshabilitar" />
+                                 </items>
+                              </SplitMenuButton>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Tipos de plato">
+                           <graphic>
+                              <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarTipoañadir" text="Añadir" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarTipoEliminar" text="Eliminar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarActualizarTipo" text="Actualizar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarDeshabilitarTipo" text="Deshabilitar" />
+                                 </items>
+                              </SplitMenuButton>
+                           </graphic>
+                        </MenuItem>
                     </items>
                   </SplitMenuButton>
                </graphic>
             </MenuItem>
-            <MenuItem mnemonicParsing="false">
+            <MenuItem mnemonicParsing="false" text="B">
                <graphic>
                   <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Resgistrar">
                      <items>
@@ -53,7 +85,7 @@
                   </SplitMenuButton>
                </graphic>
             </MenuItem>
-            <MenuItem mnemonicParsing="false">
+            <MenuItem mnemonicParsing="false" text="C">
                <graphic>
                   <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Generar Formularios">
                      <items>
@@ -67,7 +99,7 @@
                   </SplitMenuButton>
                </graphic>
             </MenuItem>
-            <MenuItem mnemonicParsing="false">
+            <MenuItem mnemonicParsing="false" text="D">
                <graphic>
                   <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Generar csv">
                      <items>
@@ -79,7 +111,7 @@
                   </SplitMenuButton>
                </graphic>
             </MenuItem>
-            <MenuItem mnemonicParsing="false">
+            <MenuItem mnemonicParsing="false" text="E">
                <graphic>
                   <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Importar csv">
                      <items>
@@ -90,7 +122,7 @@
                   </SplitMenuButton>
                </graphic>
             </MenuItem>
-            <MenuItem mnemonicParsing="false">
+            <MenuItem mnemonicParsing="false" text="F">
                <graphic>
                   <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Listar">
                      <items>
@@ -101,6 +133,9 @@
                </graphic>
             </MenuItem>
         </items>
+         <font>
+            <Font size="16.0" />
+         </font>
       </SplitMenuButton>
       <ImageView fitHeight="119.0" fitWidth="484.0" layoutX="35.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>

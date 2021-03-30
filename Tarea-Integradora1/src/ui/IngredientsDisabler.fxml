@@ -11,27 +11,32 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <TableView fx:id="ingredientsDeletingTbv" onSort="#ingredientsDeletingTbvStart" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #cfc50b;" BorderPane.alignment="CENTER">
+      <TableView fx:id="ingredientsDisableTbv" onSort="#ingredientsDisableTbvStart" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #cfc50b;" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="ingredientsDeleteCol1tbv" prefWidth="313.0" text="Ingredients" />
+          <TableColumn fx:id="ingredientsDisableCol1tbv" prefWidth="313.0" text="Ingredients" />
         </columns>
       </TableView>
    </center>
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="10.0" layoutY="102.0" text="Nombre de ingrediente a eliminar" textFill="#cfc50b">
+            <Label layoutX="10.0" layoutY="102.0" text="Nombre de ingrediente a deshabilitar" textFill="#cfc50b">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="ingredientDeleteNametxt" layoutX="22.0" layoutY="127.0" prefHeight="25.0" prefWidth="210.0" />
-            <Label layoutX="34.0" layoutY="41.0" text="ELIMINAR INGREDIENTES" textFill="#cfc50b">
+            <TextField fx:id="ingredientDisablerNametxt" layoutX="22.0" layoutY="138.0" prefHeight="25.0" prefWidth="210.0" />
+            <Label layoutX="17.0" layoutY="41.0" text="DESHABILITAR INGREDIENTES" textFill="#cfc50b">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button layoutX="88.0" layoutY="222.0" mnemonicParsing="false" onAction="#EliminarIngredientesbtn" text="Eliminar">
+            <Button layoutX="127.0" layoutY="222.0" mnemonicParsing="false" onAction="#CrearIngredientesDisablebtn" text="Crear">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="48.0" layoutY="222.0" mnemonicParsing="false" onAction="#VolverIngredientesDisablebtn" text="Volver">
                <font>
                   <Font size="15.0" />
                </font>
