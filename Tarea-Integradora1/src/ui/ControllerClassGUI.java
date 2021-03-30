@@ -19,8 +19,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 public class ControllerClassGUI {
-	private GoldenHouse GH=new GoldenHouse();
-	
+	private GoldenHouse GH;
+	public ControllerClassGUI(GoldenHouse cc){
+		GH=cc;
+	}
+	 public void initialize() {
+		 
+	    }
 	
 
     
