@@ -16,10 +16,6 @@ public class Main extends Application {
 		controllerClassGUI=new ControllerClassGUI(GH);
 	}
 	
-	public  void main(String[] args) {
-		launch(args);
-
-	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -34,6 +30,11 @@ public class Main extends Application {
 		primaryStage.setTitle("Login");
 		primaryStage.show();
 		
+	}
+	public  void main(String[] args) {
+		
+		launch(args);
+
 	}
 
 }

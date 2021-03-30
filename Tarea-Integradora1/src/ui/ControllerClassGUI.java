@@ -23,7 +23,8 @@ public class ControllerClassGUI {
 	public ControllerClassGUI(GoldenHouse cc){
 		GH=cc;
 	}
-	 public void initialize() {
+	
+	public void initialize() {
 		 
 	    }
 	
