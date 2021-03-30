@@ -64,6 +64,38 @@ private  String separator;
 	
 		 
 	}
+	//getters de ArrayList
+	public ArrayList<LocalDateTime> getDate(){
+		return dates;
+	}
+	
+	public ArrayList<String> getCodes(){
+		return codeAmount;
+	}
+	public ArrayList<User> getUsers(){
+		return users;
+	}
+	public ArrayList<Client> getClients(){
+		return clients;
+	}
+	public ArrayList<String> getTypesEnabled(){
+		return typesEnabled;
+	}
+	public ArrayList<String> getTypesList(){
+		return typesAmount;
+	}
+	public ArrayList<Products> getEnabledProducts(){
+		return productsEnabled;
+	}
+	public ArrayList<Products> getProducts(){
+		return productsList;
+	}
+	public ArrayList<String> getIngredients(){
+		return ingredients;
+	}
+	public ArrayList<String> getIngredientsEnabled(){
+		return ingredientsEnabled;
+	}
 //Serialización
 	
 	public void saveProductsData() throws FileNotFoundException, IOException {
@@ -552,6 +584,15 @@ private  String separator;
 	}
 		return false;
 }
+	public boolean updateIngredients(String name, String newName) {
+		for(int i=0;i<ingredients.size();i++) {
+			if(name.equalsIgnoreCase(ingredients.get(i))) {
+				ingredients.set(i, newName);
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public boolean updateSize(String name, String newSize) throws FileNotFoundException, IOException {
 		for(int i=0; i<productsList.size();i++) {

@@ -14,8 +14,28 @@
                <graphic>
                   <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#gestionarClientes" text="Clientes" />
-                        <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Usuarios" />
+                        <MenuItem mnemonicParsing="false" onAction="#gestionarClientes" text="Clientes">
+                           <graphic>
+                              <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarClientes" text="Añadir" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Eliminar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarProductos" text="Actualizar" />
+                                 </items>
+                              </SplitMenuButton>
+                           </graphic></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Usuarios">
+                           <graphic>
+                              <SplitMenuButton mnemonicParsing="false" style="-fx-background-color: #cfc50b;" text="Gestionar">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarClientes" text="Añadir" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarUsuarios" text="Eliminar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarProductos" text="Actualizar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarIngredientes" text="Desabilitar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#gestionarIngredientes" text="Desabilitar" />
+                                 </items>
+                              </SplitMenuButton>
+                           </graphic></MenuItem>
                       <MenuItem mnemonicParsing="false" onAction="#gestionarProductos" text="Productos" />
                       <MenuItem mnemonicParsing="false" onAction="#gestionarIngredientes" text="Ingredientes" />
                         <MenuItem mnemonicParsing="false" onAction="#gestionarTiposDePlato" text="Tipos de plato" />
