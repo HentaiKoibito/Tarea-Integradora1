@@ -19,7 +19,7 @@ import java.util.Comparator;
 
 public class GoldenHouse implements Serializable  {
 
-private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 4L;
 private ArrayList<Products> productsList;
 private ArrayList<Products> productsEnabled;
 private ArrayList<String> typesAmount;
@@ -31,17 +31,17 @@ private ArrayList<User> users;
 private ArrayList<Order> orders;
 private ArrayList<String> codeAmount;
 private ArrayList<LocalDateTime> dates;
-private final static String PRODUCTS_SAVE_PATH_FILE="data/products.muc";
-private final static String PRODUCTSENABLED_SAVE_PATH_FILE="data/ProductsEnabled.muc";
-private final static String ORDER_SAVE_PATH_FILE="data/Order.muc";
-private final static String USER_SAVE_PATH_FILE="data/User.muc";
-private final static String CLIENT_SAVE_PATH_FILE="data/Client.muc";
-private final static String INGREDIENTS_SAVE_PATH_FILE="data/Ingredients.muc";
-private final static String INGREDIENTSENABLED_SAVE_PATH_FILE="data/IngredientsEnabled.muc";
-private final static String TYPESENABLED_SAVE_PATH_FILE="data/TypesEnabled.muc";
-private final static String TYPES_SAVE_PATH_FILE="data/Types.muc";
-private final static String CODES_SAVE_PATH_FILE="data/Codes.muc";
-private final static String DATES_SAVE_PATH_FILE="data/Dates.muc";
+private final static String PRODUCTS_SAVE_PATH_FILE="Data/products.muc";
+private final static String PRODUCTSENABLED_SAVE_PATH_FILE="Data/ProductsEnabled.muc";
+private final static String ORDER_SAVE_PATH_FILE="Data/Order.muc";
+private final static String USER_SAVE_PATH_FILE="Data/User.muc";
+private final static String CLIENT_SAVE_PATH_FILE="Data/Client.muc";
+private final static String INGREDIENTS_SAVE_PATH_FILE="Data/Ingredients.muc";
+private final static String INGREDIENTSENABLED_SAVE_PATH_FILE="Data/IngredientsEnabled.muc";
+private final static String TYPESENABLED_SAVE_PATH_FILE="Data/TypesEnabled.muc";
+private final static String TYPES_SAVE_PATH_FILE="Data/Types.muc";
+private final static String CODES_SAVE_PATH_FILE="Data/Codes.muc";
+private final static String DATES_SAVE_PATH_FILE="Data/Dates.muc";
 private  String separator;
 
 
@@ -546,6 +546,16 @@ private  String separator;
 		return false;
 }		
 	
+	public boolean updateTypes(String name, String newName) {
+		for(int i=0;i<typesAmount.size();i++) {
+			if(name.equalsIgnoreCase(typesAmount.get(i))) {
+				typesAmount.set(i, newName);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean updateTypeProducts(String name, String finalType) throws FileNotFoundException, IOException {
 		for(int i=0;i<productsEnabled.size();i++) {
 			if(name.equalsIgnoreCase(productsEnabled.get(i).getName())) {
@@ -567,7 +577,7 @@ private  String separator;
 	
 	//Para actualizar los ingredientes de un producto será necesario 
 	//Crear una interfaz la cual le permita al usuario dar click en los nuevos ingredientes
-	public boolean updateIngredients(String name, String[] newIngredients) throws FileNotFoundException, IOException {
+	public boolean updateIngredientstoaProduct(String name, String[] newIngredients) throws FileNotFoundException, IOException {
 		for(int i=0; i<productsList.size();i++) {
 		if(name.equalsIgnoreCase(productsList.get(i).getName())) {
 			productsList.get(i).setIngredients(chooseIngredientToAProduct(newIngredients));
